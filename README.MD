@@ -1,55 +1,48 @@
-# Getting Started with MERN-BP
+# Welcome to FitFox
 
-`npm i @kwanele_khumalo/mern-bp`
-
-## Folder & File Structure: 
-
-`.gitignore: ` Modify as you see fit.
-
-
-###### BACKEND:
+`Thank you for checking this app out. Still under development.`
 
 ### Access to the backend
-In your Terminal, run: 
+`cd server`
+Install Dependencies:
+`npm install`
 
-`cd server` to be in the server.
-`Install Dependencies`: See `/server/README.MD` 
+### Modify the .env variables
+
+Use the `example.env` as a guide for your variables. 
 
 **Note: The server will not start without connecting to Mongodb** 
+
+#### Running the Server: 
+In the project directory, run: 
+
+`npm run dev`
+
+**Server will Run on port 4000**
+
+
+##### Server Directory Structure: 
+
+### `Controllers`: Houses primary functions and exports them for routes
+### `Routes`: Houses primary routes
+### `Middleware`: Houses all your middleware functions
+### `Models`: Your schemas live here
+### `Utils` : Necessary Utility/Configuration/Helper Functions. The `/server/utils/runApp.js` is responsible for connecting to the db and running the application. 
+### `.env` : Environment Variables. Keep all these secret
+### `server.js` : Entry File.
 
 
 ###### FRONTEND:
 
 ### Access to the Client Side
-In your Terminal, run: 
+ `cd frontend` to be in the client.
 
-`cd frontend` to be in the client.
-
-`Install Dependencies`: `npm i` OR `npm install`
+`Install Dependencies:
+`npm install`
 
 `run Frontend`: `npm start` 
 
+`App will run on http://localhost:3000/`
+
 **Also See `/frontend/README.MD`
 
-
-
-###### DISCLAIMER: 
-
-**This is a basic Boilerplate application**
-
-`Modify the application to fit your needs.`
-
-`This application is intended to be used as a starting point for your MERN applications.`
-
-`This application is built to be scalable. Go through the files, and enhance its capabilities.`
-
-
-**If you don't understand the tech stack utilized. Please learn more about the stack before proceeding so you can understand what's going on with the code.** 
-
-
-
-###### THANK YOU FOR WORKING WITH THIS PACKAGE! PLEASE PROVIDE US WITH FEEDBACK AND REPORT ANY ISSUES
-
-
-
-###### HAPPY PROGRAMMING! 
