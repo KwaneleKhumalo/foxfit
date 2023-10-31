@@ -44,5 +44,3 @@ In the project directory, run:
 
 `App will run on http://localhost:3000/`
 
-**Also See `/frontend/README.MD`
-
