@@ -25,8 +25,8 @@ In the project directory, run:
 
 ### `Controllers`: Houses primary functions and exports them for routes
 ### `Routes`: Houses primary routes
-### `Middleware`: Houses all your middleware functions
-### `Models`: Your schemas live here
+### `Middleware`: Houses all middleware functions
+### `Models`: Schemas live here
 ### `Utils` : Necessary Utility/Configuration/Helper Functions. The `/server/utils/runApp.js` is responsible for connecting to the db and running the application. 
 ### `.env` : Environment Variables. Keep all these secret
 ### `server.js` : Entry File.
