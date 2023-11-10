@@ -42,7 +42,7 @@ export const monthlyPricing = [
         feature: "Lorem ipsum dolor sit amet."
       },
       {
-        featureID: "C",
+        featureID: "D",
         feature: "Lorem ipsum dolor sit amet."
       }
     ]
@@ -67,11 +67,11 @@ export const monthlyPricing = [
         feature: "Lorem ipsum dolor sit amet."
       },
       {
-        featureID: "B",
+        featureID: "D",
         feature: "Lorem ipsum dolor sit amet."
       },
       {
-        featureID: "C",
+        featureID: "E",
         feature: "Lorem ipsum dolor sit amet."
       }
     ]

@@ -5,11 +5,9 @@ import { Link } from "react-router-dom"
 import WebFooter from "./WebFooter"
 import ProgramsHeaderContent from "./ProgramsHeaderContent"
 import { programs } from "../features/programs"
+import { isEvenNum } from "../utils/helperFunctions"
 
 const ProgramsComponent = () => {
-  const isProgramEvenNum = n => {
-    return n % 2 == 0
-  }
   return (
     <div>
       <Header content={<ProgramsHeaderContent />} />
@@ -53,8 +51,8 @@ const ProgramsComponent = () => {
       </Row>
 
       {programs.map(program => (
-        <Row key={program.programID} className={isProgramEvenNum(program.programID) ? "py-5 bg-dark-subtle text-dark" : "py-5 bg-dark text-light"}>
-          {isProgramEvenNum(program.programID) ? (
+        <Row key={program.programID} className={isEvenNum(program.programID) ? "py-5 bg-dark-subtle text-dark" : "py-5 bg-dark text-light"}>
+          {isEvenNum(program.programID) ? (
             <>
               <Col md={6} className="text-center p-5">
                 <img style={styles.image} className="shadow shadow-lg rounded rounded-5" src={program.programImg} alt={program.altText} />

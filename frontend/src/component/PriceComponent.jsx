@@ -20,7 +20,7 @@ const PriceComponent = () => {
           </h2>
         </Col>
         {monthlyPricing.map(price => (
-          <Col md={3} className="shadow shadow-lg p-0 rounded rounded-3 mx-auto text-light bg-dark mb-5">
+          <Col md={3} className="shadow shadow-lg p-0 rounded rounded-3 mx-auto text-light bg-dark mb-5" key={price.subscriptionID}>
             <h4 className="mb-3 text-center bg-danger ms-auto text-light ">{price.subscriptionType}</h4>
             <h3 className="text-center">{price.subscriptionDescription}</h3>
             <h4 className="text-start mt-3 p-3 border-bottom border-danger col-md-11 text-info mx-auto">
@@ -49,7 +49,7 @@ const PriceComponent = () => {
           </h2>
         </Col>
         {annualPricing.map(price => (
-          <Col md={3} className="shadow shadow-lg p-0 rounded rounded-3 mx-auto text-dark bg-dark-subtle mb-5">
+          <Col md={3} className="shadow shadow-lg p-0 rounded rounded-3 mx-auto text-dark bg-dark-subtle mb-5" key={price.subscriptionID}>
             <h4 className="mb-3 text-center bg-danger ms-auto text-light p-2">{price.subscriptionType}</h4>
             <h3 className="text-center">{price.subscriptionDescription}</h3>
             <h4 className="text-start mt-3 p-3 border-bottom border-danger col-md-11 text-danger mx-auto">

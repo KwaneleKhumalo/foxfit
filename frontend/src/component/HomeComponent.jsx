@@ -4,8 +4,11 @@ import Header from "./Header"
 import { Link } from "react-router-dom"
 import WebFooter from "./WebFooter"
 import HomeHeaderContent from "./HomeHeaderContent"
+import { trainingGroups, trainers } from "../features/Home"
+import { isEvenNum } from "../utils/helperFunctions"
 
 const HomeComponent = () => {
+  
   return (
     <div>
       <Header content={<HomeHeaderContent />} />
@@ -64,6 +67,7 @@ const HomeComponent = () => {
           <img style={styles.image} className="shadow shadow-lg rounded rounded-5" src="https://thumbnails-photos.amazon.com/v1/thumbnail/7xVKM2CPQyGfzANXvmggdw?viewBox=1578%2C995&ownerId=A1YK1TL6G91V5W&groupShareToken=YPVeoTYSQheTmZeu0LLFXg.BVhgUwyb_OGZCc5J_YPURb" alt="2 people on stationery bikes in the gym" />
         </Col>
       </Row>
+
       <Row className="border py-5 bg-dark-subtle text-dark ">
         <Col md={12} className="mx-aut0 my-auto text-center">
           <h2 style={styles.heading1} className="col-md-5 mx-auto ">
@@ -74,28 +78,17 @@ const HomeComponent = () => {
           </p>
         </Col>
         <Row className="p-5 text-center mx-auto">
-          <Col md={3} className=" py-3 shadow shadow-lg px-3 rounded rounded-2  mx-auto">
-            <FaCheckCircle size={25} className="mb-5" />
-            <h4 className="mb-3">Personal Training</h4>
-            <p className="mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi dolores magni voluptatibus, sit sed accusamus eos eius vitae quod autem consequuntur tenetur laboriosam fuga aliquam veritatis fugit aut in quo nobis inventore quasi numquam quis laudantium repudiandae! Vitae, nostrum cupiditate!</p>
-            <Button variant="outline-danger">Learn More</Button>
-          </Col>
-
-          <Col md={3} className=" py-3 shadow shadow-lg px-3 rounded rounded-2  mx-auto bg-danger text-light">
-            <FaCheckCircle size={25} className="mb-5" />
-            <h4 className="mb-3">Small Groups Training</h4>
-            <p className="mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi dolores magni voluptatibus, sit sed accusamus eos eius vitae quod autem consequuntur tenetur laboriosam fuga aliquam veritatis fugit aut in quo nobis inventore quasi numquam quis laudantium repudiandae! Vitae, nostrum cupiditate!</p>
-            <Button variant="outline-light">Learn More</Button>
-          </Col>
-
-          <Col md={3} className=" py-3 shadow shadow-lg px-3 rounded rounded-2  mx-auto">
-            <FaCheckCircle size={25} className="mb-5" />
-            <h4 className="mb-3">Large Groups Training</h4>
-            <p className="mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi dolores magni voluptatibus, sit sed accusamus eos eius vitae quod autem consequuntur tenetur laboriosam fuga aliquam veritatis fugit aut in quo nobis inventore quasi numquam quis laudantium repudiandae! Vitae, nostrum cupiditate!</p>
-            <Button variant="outline-danger">Learn More</Button>
-          </Col>
+          {trainingGroups.map(group => (
+            <Col md={4} className={isEvenNum(group.groupId) ? "py-3 shadow shadow-lg px-3 rounded rounded-2  mx-auto bg-danger text-light" : "py-3 shadow shadow-lg px-3 rounded rounded-2  mx-auto"} key={group.groupId}>
+              <FaCheckCircle size={25} className="mb-5" />
+              <h4 className="mb-3">{group.groupName}</h4>
+              <p className="mb-3">{group.description}</p>
+              <Button variant={isEvenNum(group.groupId) ? "outline-light" : "outline-danger"}>Learn More</Button>
+            </Col>
+          ))}
         </Row>
       </Row>
+
       <Row className="border py-5 bg-dark text-light ">
         <Col md={12} className="mx-aut0 my-auto text-center">
           <h2 style={styles.heading2} className="col-12 mx-auto">
@@ -103,29 +96,15 @@ const HomeComponent = () => {
           </h2>
         </Col>
         <Row className="p-5 text-center mx-auto">
-          <Col md={3} className="mx-auto mt-5 mt-lg-0">
-            <h4 className="mt-5 mb-3">Jamal Jordan</h4>
-            <img className="rounded rounded-3" style={styles.image} src="https://thumbnails-photos.amazon.com/v1/thumbnail/snKKCF4PQqOcT-MJqw9cSQ?ownerId=A1YK1TL6G91V5W&viewBox=467%2C701&groupShareToken=2zyuhhXGQFuaJY_SfL8g2g.e-lCM-4CfiUPTr80Y7oQjz" alt="Man standing, holding his chin and folding one arm." />
-            <Button variant="outline-danger" className="mt-3">
-              Learn More
-            </Button>
-          </Col>
-
-          <Col md={3} className="mx-auto mt-sm-5">
-            <h4 className="mb-3">Jane Smith</h4>
-            <img className="rounded rounded-3" style={styles.image} src="https://thumbnails-photos.amazon.com/v1/thumbnail/7jcDFMP_SWOk69yqai5jEg?viewBox=664%2C995&ownerId=A1YK1TL6G91V5W&groupShareToken=NegaRMCnTxSQOKMUk9u3Tg.vxkweV5DYdUReD0sSTv5jf" alt="Middle aged woman working out in the field." />
-            <Button variant="outline-danger" className="mt-3">
-              Learn More
-            </Button>
-          </Col>
-
-          <Col md={3} className="mx-auto mt-sm-5">
-            <h4 className="mb-3">Julio Mendez</h4>
-            <img className="rounded rounded-3" style={styles.image} src="https://thumbnails-photos.amazon.com/v1/thumbnail/7VOUKSqrRqmHViAU-QyMOQ?viewBox=663%2C995&ownerId=A1YK1TL6G91V5W&groupShareToken=gNfvaxPaS3ia0_x8gXdmTw.GkF2LIooM3PHaBFNIUiDXP" alt="Middle aged man holding a red punching bag." />
-            <Button variant="outline-danger" className="mt-3">
-              Learn More
-            </Button>
-          </Col>
+          {trainers.map(trainer => (
+            <Col md={3} className="mx-auto mt-5 mt-lg-0" key={trainer.trainerId}>
+              <h4 className="mt-5 mb-3">{trainer.trainerName}</h4>
+              <img className="rounded rounded-3" style={styles.image} src={trainer.trainerImg} alt={trainer.altText} />
+              <Button variant="outline-danger" className="mt-3">
+                Learn More
+              </Button>
+            </Col>
+          ))}
         </Row>
       </Row>
       <Row className="border p-5 bg-dark-subtle text-dark ">
