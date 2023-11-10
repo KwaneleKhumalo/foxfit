@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom"
@@ -14,8 +14,13 @@ import ProgramsScreen from './pages/ProgramsScreen';
 import PriceScreen from './pages/PriceScreen';
 import PaymentScreen from './pages/PaymentScreen';
 import WorkoutScreen from './pages/WorkoutScreen';
+
+import NotFoundScreen from './pages/NotFoundScreen';
+
 const router = createBrowserRouter(
+  
   createRoutesFromElements(
+    
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
       <Route path="/about" element={<AboutScreen />} />
@@ -28,6 +33,7 @@ const router = createBrowserRouter(
       <Route path="/profile" element={<ProfileScreen />} />
       <Route path="/settings" element={<SettingsScreen />} />
       <Route path="/payment" element={<PaymentScreen />} />
+      <Route path='*' element={<NotFoundScreen />} />
     </Route>
   )
 )

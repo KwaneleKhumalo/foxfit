@@ -25,11 +25,11 @@ const RegistrationForm = () => {
       const { data } = response
       setPlans(data.subscriptionPlans)
     } catch (err) {
-      if (err.message === "Network Error") {
-        setIsNetworkError(true)
-      } else {
-        setIsNetworkError(false)
-      }
+      // if (err.message === "Network Error") {
+      //   setIsNetworkError(true)
+      // } else {
+      //   setIsNetworkError(false)
+      // }
     }
   }
 
@@ -55,9 +55,14 @@ const RegistrationForm = () => {
       navigate("/profile")
       toast.success("Account Created Successfully!")
       clearForm()
-    } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.msg)
+    } catch (err) {
+      if (err.message === "Network Error") {
+        setIsNetworkError(true)
+        toast.error(err.message)
+      } else {
+        setIsNetworkError(false)
+      }
+      
     }
   }
 
@@ -68,7 +73,6 @@ const RegistrationForm = () => {
   return (
     <>
       <AuthNav />
-
       {isNetworkError ? (
         <NotFound message={"Resource Not found!"}/>
       ) : (
