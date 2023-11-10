@@ -1,11 +1,15 @@
-import { Row, Button, Col } from "react-bootstrap"
+import { Row, Col } from "react-bootstrap"
 import { FaCheckCircle } from "react-icons/fa"
 import Header from "./Header"
 import { Link } from "react-router-dom"
 import WebFooter from "./WebFooter"
-import ProgramsHeaderContent from './ProgramsHeaderContent'
+import ProgramsHeaderContent from "./ProgramsHeaderContent"
+import { programs } from "../features/programs"
 
 const ProgramsComponent = () => {
+  const isProgramEvenNum = n => {
+    return n % 2 == 0
+  }
   return (
     <div>
       <Header content={<ProgramsHeaderContent />} />
@@ -23,13 +27,11 @@ const ProgramsComponent = () => {
           <Row>
             <Col md={6} className=" bg-danger shadow shadow-lg text-light rounded rounded-3 mb-3">
               <FaCheckCircle size={20} />
-
               <h4>Energetic Life</h4>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis aperiam a perspiciatis alias, vitae numquam adipisci hic corporis, reiciendis ad corrupti est, omnis dolor animi?</p>
             </Col>
             <Col md={6} className="rounded shadow rounded-3 p-2 mb-3">
               <FaCheckCircle size={20} />
-
               <h4>Healthy Body</h4>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis aperiam a perspiciatis alias, vitae numquam adipisci hic corporis, reiciendis ad corrupti est, omnis dolor animi?</p>
             </Col>
@@ -49,48 +51,43 @@ const ProgramsComponent = () => {
           </Row>
         </Col>
       </Row>
-      <Row className="border py-5 bg-dark text-light ">
-        <Col md={6} className="mx-auto my-auto text-center text-md-start">
-          <p className="text-success col-md-6 mx-auto">Personal Training</p>
-          <h2 style={styles.heading1} className="col-md-6 mt-3 mb-4 mx-auto ">
-            Let's get you to your new Routine!
-          </h2>
-          <p style={styles.p} className="col-md-6 mx-auto">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi odit pariatur deserunt repellat impedit reiciendis illo excepturi ad rerum, nesciunt non ipsam eum mollitia sint? Minus accusantium quam eligendi blanditiis!
-          </p>
-        </Col>
-        <Col md={6} className="text-center p-5">
-          <img style={styles.image} className="shadow shadow-lg rounded rounded-5" src="https://thumbnails-photos.amazon.com/v1/thumbnail/WVM2FGNoSCmrPrg9fZyZBA?viewBox=1493%2C995&ownerId=A1YK1TL6G91V5W&groupShareToken=AyDeSSc_QAyr6Hp_VykAMQ.4uqsvYttDSc1mV1X1lWOW9" alt="Female Personal trainer training a male on push-ups" />
-        </Col>
-      </Row>
-      <Row className="border py-5 bg-dark-subtle text-dark ">
-        <Col md={6} className="text-center p-5">
-          <img style={styles.image} className="shadow shadow-lg rounded rounded-5" src="https://thumbnails-photos.amazon.com/v1/thumbnail/7xVKM2CPQyGfzANXvmggdw?viewBox=1578%2C995&ownerId=A1YK1TL6G91V5W&groupShareToken=YPVeoTYSQheTmZeu0LLFXg.BVhgUwyb_OGZCc5J_YPURb" alt="2 people on stationery bikes in the gym" />
-        </Col>
-        <Col md={6} className="mx-auto my-auto text-center text-md-start">
-          <p className="text-danger col-md-6 mx-auto">Small Groups Training</p>
-          <h2 style={styles.heading1} className="col-md-6 mt-3 mb-4 mx-auto ">
-            Make Your Circle Healthier Together
-          </h2>
-          <p style={styles.p} className="col-md-6 mx-auto">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi odit pariatur deserunt repellat impedit reiciendis illo excepturi ad rerum, nesciunt non ipsam eum mollitia sint? Minus accusantium quam eligendi blanditiis!
-          </p>
-        </Col>
-      </Row>
-      <Row className="border py-5 bg-dark text-light ">
-        <Col md={6} className="mx-auto my-auto text-center text-md-start">
-          <p className="text-success col-md-6 mx-auto">Large Groups Training</p>
-          <h2 style={styles.heading1} className="col-md-6 mt-3 mb-4 mx-auto ">
-            Improve Motivation With More People
-          </h2>
-          <p style={styles.p} className="col-md-6 mx-auto">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi odit pariatur deserunt repellat impedit reiciendis illo excepturi ad rerum, nesciunt non ipsam eum mollitia sint? Minus accusantium quam eligendi blanditiis!
-          </p>
-        </Col>
-        <Col md={6} className="text-center p-5">
-          <img style={styles.image} className="shadow shadow-lg rounded rounded-5" src="https://thumbnails-photos.amazon.com/v1/thumbnail/L42gI-5dROO-08ky1-ILsQ?viewBox=1493%2C995&ownerId=A1YK1TL6G91V5W&groupShareToken=wPa2fh7DTkehrE6VLeFT8g.GX2iHUH5t5CalrO7MsBQ4S" alt="Large Groups training" />
-        </Col>
-      </Row>
+
+      {programs.map(program => (
+        <Row key={program.programID} className={isProgramEvenNum(program.programID) ? "py-5 bg-dark-subtle text-dark" : "py-5 bg-dark text-light"}>
+          {isProgramEvenNum(program.programID) ? (
+            <>
+              <Col md={6} className="text-center p-5">
+                <img style={styles.image} className="shadow shadow-lg rounded rounded-5" src={program.programImg} alt={program.altText} />
+              </Col>
+              <Col md={6} className="mx-auto my-auto text-center text-md-start">
+                <p className="text-success col-md-6 mx-auto">{program.programName}</p>
+                <h2 style={styles.heading1} className="col-md-6 mt-3 mb-4 mx-auto ">
+                  {program.programHeader}
+                </h2>
+                <p style={styles.p} className="col-md-6 mx-auto">
+                  {program.programText}
+                </p>
+              </Col>
+            </>
+          ) : (
+            <>
+              <Col md={6} className="mx-auto my-auto text-center text-md-start">
+                <p className="text-success col-md-6 mx-auto">{program.programName}</p>
+                <h2 style={styles.heading1} className="col-md-6 mt-3 mb-4 mx-auto ">
+                  {program.programHeader}
+                </h2>
+                <p style={styles.p} className="col-md-6 mx-auto">
+                  {program.programText}
+                </p>
+              </Col>
+              <Col md={6} className="text-center p-5">
+                <img style={styles.image} className="shadow shadow-lg rounded rounded-5" src={program.programImg} alt={program.altText} />
+              </Col>
+            </>
+          )}
+        </Row>
+      ))}
+
       <Row className="border p-5 bg-dark-subtle text-dark ">
         <Col md={9} className=" p-5 mx-auto rounded rounded-3 my-auto text-center bg-secondary text-light">
           <h2 style={styles.heading2} className="col-md-5 mx-auto ">
