@@ -14,8 +14,6 @@ import ProgramsScreen from './pages/ProgramsScreen';
 import PriceScreen from './pages/PriceScreen';
 import PaymentScreen from './pages/PaymentScreen';
 import WorkoutScreen from './pages/WorkoutScreen';
-
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
