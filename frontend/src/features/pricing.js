@@ -1,9 +1,12 @@
+import {FaCheckCircle} from "react-icons/fa"
+
 export const monthlyPricing = [
   {
     subscriptionID: 1,
     subscriptionType: "Bronze",
     subscriptionDescription: "1 Week Group Training",
     subscriptionPrice: 45,
+    icon: FaCheckCircle,
     subscriptionFeatures: [
       {
         featureID: "A",
@@ -24,6 +27,7 @@ export const monthlyPricing = [
     subscriptionType: "Silver",
     subscriptionDescription: "2 weeks Personal Training",
     subscriptionPrice: 65,
+    icon: FaCheckCircle,
     subscriptionFeatures: [
       {
         featureID: "A",
@@ -48,6 +52,7 @@ export const monthlyPricing = [
     subscriptionType: "Gold",
     subscriptionDescription: "1 Month Personal Training",
     subscriptionPrice: 120,
+    icon: FaCheckCircle,
     subscriptionFeatures: [
       {
         featureID: "A",
@@ -78,7 +83,8 @@ export const annualPricing = [
     subscriptionID: 1,
     subscriptionType: "Bronze",
     subscriptionDescription: "1 Week Group Training",
-    subscriptionPrice: 45,
+    subscriptionPrice: 450,
+    icon: FaCheckCircle,
     subscriptionFeatures: [
       {
         featureID: "A",
@@ -98,7 +104,8 @@ export const annualPricing = [
     subscriptionID: 2,
     subscriptionType: "Silver",
     subscriptionDescription: "2 weeks Personal Training",
-    subscriptionPrice: 65,
+    subscriptionPrice: 650,
+    icon: FaCheckCircle,
     subscriptionFeatures: [
       {
         featureID: "A",
@@ -122,7 +129,8 @@ export const annualPricing = [
     subscriptionID: 3,
     subscriptionType: "Gold",
     subscriptionDescription: "1 Month Personal Training",
-    subscriptionPrice: 120,
+    subscriptionPrice: 1200,
+    icon: FaCheckCircle,
     subscriptionFeatures: [
       {
         featureID: "A",
