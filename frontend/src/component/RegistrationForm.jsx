@@ -1,7 +1,6 @@
-import Header from "./Header"
 import AuthNav from "./AuthNav"
 import { Link, useNavigate } from "react-router-dom"
-import { Row, Form, Button, Col, Dropdown } from "react-bootstrap"
+import { Row, Form, Button, Col } from "react-bootstrap"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { SUBSCRIPTION_PLANS, USER_REGISTRATION } from "../utils/endpoints"
@@ -9,8 +8,6 @@ import { toast } from "react-toastify"
 import { formValidation, formCompleted } from "../utils/authValidation"
 
 const RegistrationForm = () => {
-
-  // Stripe : pk_test_51NtGqJKiDsBxQFyoF69biL8eY1kVfyxjpsAFYwxTP4jd4UdUqSfDyRTYbxgbh5WvUzpYkgxNPwv5XwtZRMqIYQvQ00WPTHQaHq
   const [email, setEmail] = useState("")
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -19,12 +16,10 @@ const RegistrationForm = () => {
   const [plans, setPlans] = useState("")
   const [selectedPlan, setSelectedPlan] = useState("")
 
-  
   const getSubscriptionPlans = async () => {
     try {
       const response = await axios.get(SUBSCRIPTION_PLANS)
       const { data } = response
-      console.log(data);
       setPlans(data.subscriptionPlans)
     } catch (err) {
       console.log(err)
@@ -62,8 +57,6 @@ const RegistrationForm = () => {
   useEffect(() => {
     getSubscriptionPlans()
   }, [])
-
-  console.log(selectedPlan);
 
   return (
     <>

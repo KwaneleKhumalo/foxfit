@@ -20,7 +20,6 @@ export const getSubscriptionPlans = async (req, res) => {
 export const getSingleSubscriptionPlan = async (req, res) => {
   const { subscriptionId } = req.params
   const subscriptionPlan = await Subscription.findOne({ _id: subscriptionId })
-  console.log(subscriptionId)
 
   if (!subscriptionPlan) {
     res.status(404).send("Plan not found!")
