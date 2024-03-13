@@ -11,12 +11,15 @@ const DashComponent = () => {
   const [enrollment, setEnrollment] = useState("")
   const navigate = useNavigate()
 
+
   const getUserInfo = async () => {
     const user = JSON.parse(sessionStorage.getItem("userInfo"))
     if (user) {
       setUserInfo(user)
       setIsPaid(user.isPaid)
       setEnrollment(user.enrollment)
+      console.log(user);
+      
       
     } else {
       navigate("/login")

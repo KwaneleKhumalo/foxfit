@@ -22,6 +22,7 @@ const LoginForm = () => {
     try {
       const response = await axios.post(USER_LOGIN, { email, password }, { withCredentials: true })
       const { data } = response.data
+      console.log(data);
       sessionStorage.setItem("userInfo", JSON.stringify(data))
       toast.success(response.data.msg)
       navigate("/profile")
