@@ -20,10 +20,8 @@ const WorkoutsComponent = () => {
       try {
       setIsLoading(true)
         const response = await axios.get(WORKOUT, { withCredentials: true })
-        console.log("Response data:", response.data) 
         if (response && response.data) {
           const { workouts } = response.data
-          console.log("Workouts:", workouts) 
           setWorkoutPlans(workouts.length > 0 ? workouts : null)
         }
         setIsLoading(false)

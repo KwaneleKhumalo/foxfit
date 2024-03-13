@@ -18,8 +18,6 @@ const DashComponent = () => {
       setUserInfo(user)
       setIsPaid(user.isPaid)
       setEnrollment(user.enrollment)
-      console.log(user);
-      
       
     } else {
       navigate("/login")

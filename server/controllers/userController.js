@@ -58,7 +58,8 @@ export const register = async (req, res) => {
                   membershipType: subscriptionType,
                   membershipCost: price,
                   subscriptionStart: startDate,
-                  renewalDate: endDate
+                  renewalDate: endDate,
+                  enrollment
                 }
               })
             } else {

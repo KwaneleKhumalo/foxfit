@@ -7,7 +7,7 @@ const getToken = (res, userId) => {
 
   res.cookie("authentication", token, {
     httpOnly: true,
-    sameSite: true,
+    sameSite: "None",
     secure: process.env.NODE_ENV !== "development",
     maxAge: 30 * 24 * 60 * 60 * 1000
   })
