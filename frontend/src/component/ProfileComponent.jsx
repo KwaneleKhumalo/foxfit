@@ -53,21 +53,23 @@ const ProfileComponent = () => {
       <AuthNav />
       <Row>
         <Col lg={11} className="bg-light border p-5 text-dark border-0 shadow mb-5 mt-4 mx-auto">
-          <h2 className="text-center mb-5" style={styles}>
+          <h2 className="text-center" style={styles}>
             Personal Details
           </h2>
-          <h3 className="text-center text-lg-start">{`${firstName} ${lastName}`}</h3>
-          <h6 className="text-muted border-bottom text-center text-lg-start">{email}</h6>
-          <Row className="mt-5 mx-md-auto text-center text-lg-start">
-            <Col lg={2}>
+          <h6 className="text-muted text-center p-2">{email}</h6>
+
+          <h3 className="text-center text-lg-start border-bottom p-2">{`${firstName} ${lastName}`}</h3>
+
+          <Row className="mt-5 mx-md-auto text-center text-lg-end">
+            <Col lg={3}>
               <h6>Email</h6>
               <p className="text-secondary">{email}</p>
             </Col>
-            <Col lg={2}>
+            <Col lg={3}>
               <h6>First Name</h6>
               <p className="text-secondary">{firstName}</p>
             </Col>
-            <Col lg={2}>
+            <Col lg={3}>
               <h6>First Name</h6>
               <p className="text-secondary">{lastName}</p>
             </Col>
@@ -78,8 +80,7 @@ const ProfileComponent = () => {
           <h2 className="text-center mb-5" style={styles}>
             Account Details
           </h2>
-          <h3 className="text-center text-lg-start">{`${firstName} ${lastName}`}</h3>
-          <h6 className="text-muted border-bottom text-center text-lg-start">{email}</h6>
+          <h6 className="text-muted border-bottom text-center text-lg-start"></h6>
           <Row className="mt-5 mx-md-auto text-center text-lg-start">
             <Col lg={2}>
               <h6>Member Since</h6>
@@ -111,7 +112,7 @@ const ProfileComponent = () => {
       </Row>
       <Footer />
     </>
-  )
+  );
 }
 
 const styles = {
