@@ -24,6 +24,7 @@ const PaymentComponent = () => {
   return (
     <>
       <AuthNav />
+      <h1 className="text-center"> Under Construction</h1>
     </>
   )
 }

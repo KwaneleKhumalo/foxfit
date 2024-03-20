@@ -86,8 +86,8 @@ export const login = async (req, res) => {
   const user = await User.findOne({ email }).populate("workoutPlans")
 
   if (!user) {
-    return res.status(404).send("This user doesn't exist. Please create an account.")
-  }
+    return res.status(404).send("Invalid Credentials.")
+  } else
 
   if (user && (await user.matchPassword(password))) {
     const userId = user._id
@@ -174,6 +174,8 @@ export const editUser = async (req, res) => {
     })
   }
 }
+
+// Admin Only... Still under development. 
 
 export const deleteUsers = (req, res) => {
   res.status(200).json({

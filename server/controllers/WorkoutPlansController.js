@@ -1,8 +1,6 @@
 import Workout from "../models/workoutsModel.js"
 import { populateField } from "../utils/populateFields.js"
 
-
-
 export const createWorkout = async (req, res) => {
   try {
     const user = req.user._id.toString() 
@@ -27,6 +25,7 @@ export const createWorkout = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error. Please try again!" })
   }
 }
+
 
 export const getUserWorkoutPlan = async (req, res) => {
   try {

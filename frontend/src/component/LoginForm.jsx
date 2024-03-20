@@ -21,6 +21,7 @@ const LoginForm = () => {
     try {
       const response = await axios.post(USER_LOGIN, { email, password }, { withCredentials: true })
       const { data } = response.data
+      // console.log(data);
       sessionStorage.setItem("userInfo", JSON.stringify(data))
       toast.success(response.data.msg)
       navigate("/profile")
@@ -28,7 +29,8 @@ const LoginForm = () => {
       setPassword("")
     } catch (err) {
       handleNotFound(err)
-      toast.error(err.message)
+      console.log(err.response.data);
+      toast.error(err.response.data);
     }
   }
 
