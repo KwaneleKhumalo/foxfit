@@ -21,16 +21,16 @@ const LoginForm = () => {
     try {
       const response = await axios.post(USER_LOGIN, { email, password }, { withCredentials: true })
       const { data } = response.data
-      // console.log(data);
       sessionStorage.setItem("userInfo", JSON.stringify(data))
       toast.success(response.data.msg)
       navigate("/profile")
       setEmail("")
       setPassword("")
     } catch (err) {
-      handleNotFound(err)
-      console.log(err.response.data);
-      toast.error(err.response.data);
+      if (err) {
+        handleNotFound(err);
+        if(err.response) toast.error(err.response.data);
+      }
     }
   }
 

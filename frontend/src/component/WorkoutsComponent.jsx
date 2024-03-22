@@ -3,15 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { WORKOUT } from "../utils/endpoints";
 import { toast } from "react-toastify";
-import { Col, Row, Table, Modal, Button } from "react-bootstrap";
+import { Col, Row, Table } from "react-bootstrap";
 import AuthNav from "./AuthNav";
+import WorkoutForm from "./WorkoutForm";
 
 const WorkoutsComponent = () => {
   const navigate = useNavigate();
-  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const user = JSON.parse(sessionStorage.getItem("userInfo"));
   const [workoutPlans, setWorkoutPlans] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -46,11 +44,7 @@ const WorkoutsComponent = () => {
         <Col sm="12">
           <h1 className="text-center pt-5">Workouts</h1>
         </Col>
-        <Col sm="12" className="text-center">
-          <Button variant="info" onClick={handleShow}>
-            New Routine
-          </Button>
-        </Col>
+        <WorkoutForm />
       </Row>
       <Row className="p-4">
         {workoutPlans && workoutPlans.length > 0 ? (
@@ -84,21 +78,6 @@ const WorkoutsComponent = () => {
           <h3 className="text-center mt-5">&#128564; Lazy day? Let's do something! &#128170;</h3>
         )}
       </Row>
-
-      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>New Workout</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="text-center">
-          <h3>Form will go on here</h3>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="success">Submit</Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 };
