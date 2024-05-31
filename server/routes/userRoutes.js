@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { editUser, getSingleUser, getUsers, login, logout, profile, register } from '../controllers/userController.js';
+import { editUser, getSingleUser, getUsers, login, logout, profile, register, verifyEmail } from '../controllers/userController.js';
 import { adminProtect, protect } from '../middleware/protectMiddleware.js';
 const userRouter = Router();
 
@@ -15,6 +15,7 @@ userRouter.route("/auth/settings").put(protect, editUser)
 
 // Post Route
 userRouter.post("/registration", register)
+userRouter.post("/verify-email", verifyEmail)
 userRouter.post("/login", login)
 
 // Users will need to have been Authenticated to logout

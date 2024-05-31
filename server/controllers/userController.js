@@ -135,9 +135,23 @@ export const register = async (req, res) => {
 };
 
 export const verifyEmail = async (req, res) => {
-  const getVerificationToken = req.body
+  const {verificationToken, email} = req.body
 
-  res.status(200).send(getVerificationToken)
+  const user = await User.findOne({email})
+
+  if(!user || verificationToken !== verificationToken) {
+    res.status(401).send("Invalid request! Please try again.")
+  }
+
+
+  user.isVerified = true;
+  user.dateVerified = Date.now()
+  user.verificationToken = ''
+  await user.save()
+
+  res.status(200).json({
+    msg: "Account Verified!"
+  })
 }
 
 
