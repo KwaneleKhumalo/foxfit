@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.1",
     "node-fetch": "^3.3.2",
+    "nodemailer": "^6.9.13",
     "paypal-rest-sdk": "^1.8.1",
     "stripe": "^13.9.0"
   }
