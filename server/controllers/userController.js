@@ -5,6 +5,7 @@ import subscriptionModel from "../models/subscriptionModel.js"
 import getToken from "../utils/jwtAuth.js"
 import { populateField, userEnrollmentField } from "../utils/populateFields.js"
 import crypto from 'crypto'
+import { sendEmail } from "../utils/sendEmail.js"
 
 // Post Controllers
 // export const register = async (req, res) => {
@@ -103,6 +104,8 @@ export const register = async (req, res) => {
       password,
       verificationToken
     });
+    
+    await sendEmail()
 
     if (user) {
       // getToken(res, user._id);
@@ -120,7 +123,7 @@ export const register = async (req, res) => {
               // subscriptionStart: startDate,
               // renewalDate: endDate,
               // enrollment: userEnrollmentPopulated,
-              verificationToken: user.verificationToken
+              // verificationToken: user.verificationToken
             },
           };
 
