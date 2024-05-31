@@ -6,6 +6,7 @@ import getToken from "../utils/jwtAuth.js"
 import { populateField, userEnrollmentField } from "../utils/populateFields.js"
 import crypto from 'crypto'
 import { sendEmail } from "../utils/sendEmail.js"
+import { sendVerificationEmail } from "../utils/sendVerification.js"
 
 // Post Controllers
 // export const register = async (req, res) => {
@@ -104,8 +105,10 @@ export const register = async (req, res) => {
       password,
       verificationToken
     });
+
+    const origin = 'https://digitalcircle.biz'
     
-    await sendEmail()
+    await sendVerificationEmail(user.firstName,user.email, user.verificationToken, origin)
 
     if (user) {
       // getToken(res, user._id);
