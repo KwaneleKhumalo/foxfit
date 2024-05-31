@@ -4,81 +4,142 @@ import Workout from "../models/workoutsModel.js"
 import subscriptionModel from "../models/subscriptionModel.js"
 import getToken from "../utils/jwtAuth.js"
 import { populateField, userEnrollmentField } from "../utils/populateFields.js"
+import crypto from 'crypto'
 
 // Post Controllers
-export const register = async (req, res) => {
-  const { email, firstName, lastName, password, selectedPlan } = req.body
-  const subscription = await subscriptionModel.findOne({ subscriptionType: selectedPlan })
+// export const register = async (req, res) => {
+//   const { email, firstName, lastName, password, selectedPlan } = req.body
+//   const subscription = await subscriptionModel.findOne({ subscriptionType: selectedPlan })
 
-  const userExists = await User.findOne({ email })
+//   const userExists = await User.findOne({ email })
+
+//   if (userExists) {
+//     return res.status(403).json({
+//       msg: "This user already exists. Please login."
+//     })
+//   } else {
+//     try {
+//       const user = await User.create({
+//         email,
+//         firstName,
+//         lastName,
+//         password
+//       })
+
+//       const enrollment = await userEnrollment.create({
+//         subscriber: user._id,
+//         subscription: subscription._id,
+//         startDate: new Date(),
+//         endDate: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)
+//       })
+
+//       if (user && enrollment) {
+//         getToken(res, user._id)
+
+//         // Find the user's enrollment and populate the 'subscription' field
+//         userEnrollment
+//           .findOne({ subscriber: user._id })
+//           .populate("subscription")
+//           .then(userEnrollment => {
+//             if (userEnrollment) {
+//               const subscriptionInfo = userEnrollment
+
+//               const { startDate, endDate } = subscriptionInfo
+//               const { subscriptionType, price } = subscriptionInfo.subscription
+
+//               return res.status(200).json({
+//                 msg: "Logged In Successfully!",
+//                 data: {
+//                   id: user._id,
+//                   email: user.email,
+//                   firstName: user.firstName,
+//                   lastName: user.lastName,
+//                   isPaid: user.isPaid,
+//                   createdAt: user.createdAt,
+//                   membershipType: subscriptionType,
+//                   membershipCost: price,
+//                   subscriptionStart: startDate,
+//                   renewalDate: endDate,
+//                   enrollment
+//                 }
+//               })
+//             } else {
+//               console.log("No Subscription")
+//             }
+//           })
+//           .catch(e => {
+//             console.log(e)
+//           })
+//       } else {
+//         return res.status(403).send("Failed to create a user.")
+//       }
+//     } catch (err) {
+//       const errorMessage = await Object.values(err.errors)[0].properties.message
+//       res.status(403).send(errorMessage ? `Error! ${errorMessage}.` : "Account not created. Please check your values and try again.")
+//       console.log(err)
+//     }
+//   }
+// }
+
+export const register = async (req, res) => {
+  const { email, firstName, lastName, password } = req.body;
+
+  // const subscription = await subscriptionModel.findOne({ subscriptionType: selectedPlan });
+
+  const userExists = await User.findOne({ email });
 
   if (userExists) {
     return res.status(403).json({
       msg: "This user already exists. Please login."
-    })
-  } else {
-    try {
-      const user = await User.create({
-        email,
-        firstName,
-        lastName,
-        password
-      })
-
-      const enrollment = await userEnrollment.create({
-        subscriber: user._id,
-        subscription: subscription._id,
-        startDate: new Date(),
-        endDate: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)
-      })
-
-      if (user && enrollment) {
-        getToken(res, user._id)
-
-        // Find the user's enrollment and populate the 'subscription' field
-        userEnrollment
-          .findOne({ subscriber: user._id })
-          .populate("subscription")
-          .then(userEnrollment => {
-            if (userEnrollment) {
-              const subscriptionInfo = userEnrollment
-
-              const { startDate, endDate } = subscriptionInfo
-              const { subscriptionType, price } = subscriptionInfo.subscription
-
-              return res.status(200).json({
-                msg: "Logged In Successfully!",
-                data: {
-                  id: user._id,
-                  email: user.email,
-                  firstName: user.firstName,
-                  lastName: user.lastName,
-                  isPaid: user.isPaid,
-                  createdAt: user.createdAt,
-                  membershipType: subscriptionType,
-                  membershipCost: price,
-                  subscriptionStart: startDate,
-                  renewalDate: endDate,
-                  enrollment
-                }
-              })
-            } else {
-              console.log("No Subscription")
-            }
-          })
-          .catch(e => {
-            console.log(e)
-          })
-      } else {
-        return res.status(403).send("Failed to create a user.")
-      }
-    } catch (err) {
-      const errorMessage = await Object.values(err.errors)[0].properties.message
-      res.status(403).send(errorMessage ? `Error! ${errorMessage}.` : "Account not created. Please check your values and try again.")
-      console.log(err)
-    }
+    });
   }
+
+  try {
+    const verificationToken = crypto.randomBytes(50).toString('hex')
+    const user = await User.create({
+      email,
+      firstName,
+      lastName,
+      password,
+      verificationToken
+    });
+
+    if (user) {
+      // getToken(res, user._id);
+      const response = {
+            msg: "Success! Please check your email to verify your account.",
+            data: {
+              // id: user._id,
+              // email: user.email,
+              // firstName: user.firstName,
+              // lastName: user.lastName,
+              // isPaid: user.isPaid,
+              // createdAt: user.createdAt,
+              // membershipType: subscriptionType,
+              // membershipCost: price,
+              // subscriptionStart: startDate,
+              // renewalDate: endDate,
+              // enrollment: userEnrollmentPopulated,
+              verificationToken: user.verificationToken
+            },
+          };
+
+          return res.status(200).json(response);
+    } else {
+      return res.status(403).send("Failed to create a user.");
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(403).send("There was an error")
+  }
+};
+
+export const verifyEmail = async (req, res) => {
+  const getVerificationToken = req.body
+
+  res.status(200).send(getVerificationToken)
 }
+
 
 export const login = async (req, res) => {
   const { email, password } = req.body
@@ -87,7 +148,11 @@ export const login = async (req, res) => {
 
   if (!user) {
     return res.status(404).send("Invalid Credentials.")
-  } else
+  }
+
+  if(!user.isVerified) {
+    return res.status(401).send("Access Denied. Please verify your account!")
+  }
 
   if (user && (await user.matchPassword(password))) {
     const userId = user._id
