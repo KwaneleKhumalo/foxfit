@@ -162,16 +162,21 @@ export const editUser = async (req, res) => {
     if (req.body.password) {
       user.password = req.body.password
     }
+    
     const updateUser = await user.save()
+    const workouts = await populateField(Workout, userId);
+    const enrollments = await userEnrollmentField(userEnrollment, userId);
 
     res.status(200).json({
       msg: "Account Updated Successfully!",
       data: {
         firstName: updateUser.firstName,
         lastName: updateUser.lastName,
-        email: updateUser.email
+        email: updateUser.email,
+        enrollment: enrollments,
+        workoutPlans: workouts
       }
-    })
+    });
   }
 }
 
