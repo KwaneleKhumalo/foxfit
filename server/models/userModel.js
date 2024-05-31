@@ -35,6 +35,12 @@ const UserSchema = new Schema(
       type: Boolean,
       default: true
     },
+    verificationToke: String,
+    isVerified: {
+      type: Boolean,
+      default: false
+    },
+    dateVerified: Date,
     subscriptions: {
       type: Schema.Types.ObjectId,
       ref: "Subscription"
